@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="catalog-build-id" content="98d71d1f">
+<title>Archive</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#1a1008">
+<link rel="apple-touch-icon" href="./icon.png">
+<style id="_shellStyle">
+:root{--bg:#f0e8d8;--cd:rgba(255,252,245,.88);--i:#1a1008;--d:#5a4a38;--br:rgba(26,16,8,.18);--sh:rgba(26,16,8,.10);--go:#8a6520;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0;}
+html,body{height:100%;}
+body{background:var(--bg);color:var(--i);font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;}
+#_g{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100dvh;padding:32px 24px;}
+._gi{font-size:2.2rem;margin-bottom:14px;opacity:.7;}
+._gt{font-size:1.7rem;letter-spacing:.04em;margin-bottom:4px;}
+._gs{font-style:italic;color:var(--d);font-size:.86rem;margin-bottom:26px;}
+#_g form{width:100%;max-width:300px;display:flex;flex-direction:column;gap:10px;}
+#_g input[type=text]{border:2px solid var(--br);border-radius:5px;padding:13px 14px;font-size:1rem;font-family:inherit;background:var(--cd);color:var(--i);outline:none;-webkit-appearance:none;width:100%;}
+#_g input[type=text]:focus{border-color:var(--go);}
+#_g button[type=submit]{background:var(--i);color:var(--bg);border:none;border-radius:5px;padding:13px;font-size:1rem;font-family:inherit;cursor:pointer;letter-spacing:.06em;width:100%;}
+#_g button[type=submit]:active{opacity:.8;}
+#_gm{font-size:.84rem;min-height:1.3em;margin-top:6px;text-align:center;}
+#_gm.e{color:#7a1f1f;}
+#_gm.w{color:var(--go);font-style:italic;}
+#_ref{background:none;border:1px solid rgba(26,16,8,.18);border-radius:4px;font-family:inherit;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--d);cursor:pointer;padding:7px 14px;margin-top:6px;opacity:.65;}
+#_ref:active{opacity:.4;}
+#_cl{display:none;width:100%;max-width:340px;}
+#_clbar{height:6px;background:var(--br);border-radius:3px;overflow:hidden;margin-bottom:14px;}
+#_clbarfill{display:block;height:100%;width:0%;background:var(--go);transition:width .2s ease;}
+#_clrows{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:8px;margin-bottom:16px;max-height:46vh;overflow-y:auto;padding:2px;}
+._cltile{position:relative;aspect-ratio:1;background:var(--cd);border:1px solid var(--br);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:background .15s,border-color .15s;cursor:pointer;}
+._cltile:active{opacity:.75;}
+._cltile.ok{border-color:var(--go);}
+._cltile.err{background:rgba(122,31,31,.08);border-color:#7a1f1f;}
+._cltile-icon{width:22px;height:22px;color:var(--d);}
+._cltile-icon svg{width:100%;height:100%;display:block;fill:currentColor;}
+._cltile-label{font-size:.6rem;color:var(--d);line-height:1;}
+._cltile-group-counts{display:flex;flex-direction:column;align-items:center;line-height:1.05;}
+._cltile-group-green{font-size:.92rem;font-weight:bold;color:#2f6b2f;}
+._cltile-group-red{font-size:.58rem;color:#7a1f1f;}
+._cltile-status{position:absolute;top:4px;right:4px;width:14px;height:14px;color:var(--d);}
+._cltile-status svg{width:100%;height:100%;display:block;fill:currentColor;}
+._cltile-status.ok{color:var(--go);}
+._cltile-status.err{color:#7a1f1f;}
+._cltile-status.busy{color:var(--go);animation:_clspin 1.1s linear infinite;}
+@keyframes _clspin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+._cltile-bar{position:absolute;left:0;right:0;bottom:0;height:4px;background:transparent;}
+._cltile-bar-fill{display:block;height:100%;width:0%;background:var(--go);transition:width .2s ease;}
+#_clenter{display:none;background:var(--i);color:var(--bg);border:none;border-radius:5px;padding:13px;font-size:1rem;font-family:inherit;cursor:pointer;letter-spacing:.06em;width:100%;}
+#_clenter:active{opacity:.8;}
+#_ctdlg{display:none;position:fixed;inset:0;background:rgba(26,16,8,.55);z-index:100;align-items:center;justify-content:center;padding:24px;}
+#_ctdlg.open{display:flex;}
+#_ctdlgbox{background:var(--bg);border:1px solid var(--br);border-radius:12px;padding:22px 20px;width:100%;max-width:270px;position:relative;text-align:center;box-shadow:0 8px 30px rgba(26,16,8,.25);}
+#_ctdlgclose{position:absolute;top:8px;right:10px;background:none;border:none;font-size:20px;line-height:1;color:var(--d);cursor:pointer;padding:4px;}
+#_ctdlgicon{width:34px;height:34px;margin:0 auto 8px;color:var(--d);}
+#_ctdlgicon svg{width:100%;height:100%;display:block;fill:currentColor;}
+#_ctdlgtitle{font-size:1.05rem;margin-bottom:14px;}
+._ctdlgrow{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--br);font-size:.78rem;text-align:left;}
+._ctdlgrow:last-of-type{border-bottom:none;margin-bottom:14px;}
+._ctdlgrow-label{color:var(--d);flex-shrink:0;}
+._ctdlgrow-value{text-align:right;word-break:break-all;}
+._ctdlg-status-ic{display:inline-flex;width:13px;height:13px;vertical-align:-2px;margin-right:4px;color:var(--d);}
+._ctdlg-status-ic svg{width:100%;height:100%;display:block;fill:currentColor;}
+._ctdlg-status-ic.ok{color:var(--go);}
+._ctdlg-status-ic.err{color:#7a1f1f;}
+#_ctdlgretry{display:none;background:var(--i);color:var(--bg);border:none;border-radius:5px;padding:10px;font-size:.85rem;font-family:inherit;cursor:pointer;width:100%;letter-spacing:.04em;}
+#_ctdlgretry:active{opacity:.8;}
+</style>
+</head>
+<body>
+<div id="_g">
+  <div class="_gi">&#x1F512;</div>
+  <h1 class="_gt">Archive</h1>
+  <p class="_gs">Private collection</p>
+  <form id="_gf" autocomplete="off">
+    <input type="text" id="_pw" placeholder="Passphrase" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" style="-webkit-text-security:disc">
+    <button type="submit">Unlock</button>
+  </form>
+  <div id="_gm"></div>
+  <div id="_cl">
+    <div id="_clbar"><span id="_clbarfill"></span></div>
+    <div id="_clrows"></div>
+    <button id="_clenter" type="button">Enter catalog &#x2192;</button>
+  </div>
+  <button id="_ref" type="button">&#x21BB; Force refresh</button>
+</div>
+<div id="_ctdlg">
+  <div id="_ctdlgbox">
+    <button id="_ctdlgclose" type="button" aria-label="Close">&#x2715;</button>
+    <div id="_ctdlgicon"></div>
+    <div id="_ctdlgtitle"></div>
+    <div class="_ctdlgrow"><span class="_ctdlgrow-label">Status</span><span class="_ctdlgrow-value" id="_ctdlgstatus"></span></div>
+    <div class="_ctdlgrow"><span class="_ctdlgrow-label">Size</span><span class="_ctdlgrow-value" id="_ctdlgsize"></span></div>
+    <div class="_ctdlgrow"><span class="_ctdlgrow-label" id="_ctdlgfilelabel">File</span><span class="_ctdlgrow-value" id="_ctdlgfile"></span></div>
+    <button id="_ctdlgretry" type="button">Retry</button>
+  </div>
+</div>
+<script>if('serviceWorker'in navigator){navigator.serviceWorker.register('./sw.js');}</script>
+<script>
+(function(){
+  var SALT_B64='g6WtDOqEIupEVlFbLZFy3w==';
+  var IT=100000;
+  var SK='_p';
+  var gm=document.getElementById('_gm');
+
+  function b2b(b){return Uint8Array.from(atob(b),function(c){return c.charCodeAt(0);});}
+
+  function dk(p,s){
+    return crypto.subtle.importKey('raw',new TextEncoder().encode(p),'PBKDF2',false,['deriveKey'])
+      .then(function(km){
+        return crypto.subtle.deriveKey(
+          {name:'PBKDF2',salt:s,iterations:IT,hash:'SHA-256'},
+          km,{name:'AES-GCM',length:256},false,['decrypt']
+        );
+      });
+  }
+
+  // Decrypts one fetched module's raw ArrayBuffer. Same iv(12)||data||tag
+  // binary layout already used for sprite sheets (no per-file salt — every
+  // module and every sprite sheet shares the ONE session key derived from
+  // SALT_B64 above), so this is the exact same shape as sprite-worker.js's
+  // own attemptSheetLoad() decrypt step, just fetching a differently-named
+  // file.
+  function decModule(buf,k){
+    var bytes=new Uint8Array(buf),iv=bytes.slice(0,12),data=bytes.slice(12);
+    return crypto.subtle.decrypt({name:'AES-GCM',iv:iv},k,data)
+      .then(function(r){return new TextDecoder().decode(r);});
+  }
+
+  // crypto.subtle.decrypt() has been observed to transiently throw
+  // OperationError even on correct input under load (see sprite-worker.js's
+  // own getSheetImage() retry) — cheap insurance to retry a few times
+  // before concluding the passphrase itself is actually wrong.
+  function decModuleWithRetry(buf,k,attemptsLeft){
+    if(attemptsLeft===undefined)attemptsLeft=3;
+    return decModule(buf,k).catch(function(err){
+      if(attemptsLeft>1)return decModuleWithRetry(buf,k,attemptsLeft-1);
+      throw err;
+    });
+  }
+
+  function launch(html){
+    // The lock screen's own <style id="_shellStyle"> (html,body{height:100%}
+    // among other rules, needed to center the passphrase prompt) otherwise
+    // lingers in <head> forever — appendChild below only ever ADDS the real
+    // app's styles alongside it, never removes it. That leftover
+    // html,body{height:100%} caps <body>'s own box at exactly viewport
+    // height while the real catalog content overflows far past it, so any
+    // position:sticky element whose containing block is <body> itself
+    // (the toolbar) runs out of room to stick in and scrolls away once
+    // you pass one viewport-height of scroll — while a sticky element
+    // whose containing block is something taller (the filters sidebar,
+    // contained in #layout, which grows with the actual grid) stays stuck
+    // correctly the whole way. Removing the shell style before launching
+    // fixes this for good.
+    var shellStyle=document.getElementById('_shellStyle');
+    if(shellStyle)shellStyle.parentNode.removeChild(shellStyle);
+    var inner=new DOMParser().parseFromString(html,'text/html');
+    document.title=inner.title;
+    inner.querySelectorAll('style').forEach(function(s){
+      document.head.appendChild(document.importNode(s,true));
+    });
+    // Query the whole parsed document, not just inner.body — a fragment
+    // that's ONLY <script> tags (the data module) has no other body-
+    // inducing content, so the HTML tree-construction algorithm places
+    // those scripts under <head> instead of <body>. inner.body would find
+    // zero scripts for that module and silently skip injecting it.
+    var scripts=[];
+    inner.querySelectorAll('script').forEach(function(s){
+      scripts.push(s.textContent);
+      s.parentNode.removeChild(s);
+    });
+    document.body.className=inner.body.className;
+    document.body.innerHTML=inner.body.innerHTML;
+    scripts.forEach(function(code){
+      var s=document.createElement('script');
+      s.textContent=code;
+      document.body.appendChild(s);
+    });
+  }
+
+  // ── Update checklist ─────────────────────────────────────────────────
+  // Replaces the old "decrypt both modules and launch immediately"
+  // tryUnlock() with a state machine: derive the key, fetch the manifest,
+  // show every content module (shell, misc, store-history, the catalog
+  // fragments as one aggregate tile, each sprite sheet) with its
+  // unchanged/stale status, auto-download whatever's stale with visible
+  // progress, and only then reveal a manual "Enter catalog" button — never
+  // auto-proceed, even when nothing needed downloading. No page reload:
+  // the existing launch() already injects content into the live page, so
+  // it just moves behind the button click instead of firing automatically.
+  var MODULES_CACHE_NAME='catalog-modules';
+  var DOWNLOAD_CONCURRENCY=3;
+  var ICONS={"apps":"<svg viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z\"/></svg>","database":"<svg viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M480-120q-151 0-255.5-46.5T120-280v-400q0-66 105.5-113T480-840q149 0 254.5 47T840-680v400q0 67-104.5 113.5T480-120Zm0-479q89 0 179-25.5T760-679q-11-29-100.5-55T480-760q-91 0-178.5 25.5T200-679q14 30 101.5 55T480-599Zm0 199q42 0 81-4t74.5-11.5q35.5-7.5 67-18.5t57.5-25v-120q-26 14-57.5 25t-67 18.5Q600-528 561-524t-81 4q-42 0-82-4t-75.5-11.5Q287-543 256-554t-56-25v120q25 14 56 25t66.5 18.5Q358-408 398-404t82 4Zm0 200q46 0 93.5-7t87.5-18.5q40-11.5 67-26t32-29.5v-98q-26 14-57.5 25t-67 18.5Q600-328 561-324t-81 4q-42 0-82-4t-75.5-11.5Q287-343 256-354t-56-25v99q5 15 31.5 29t66.5 25.5q40 11.5 88 18.5t94 7Z\"/></svg>","image":"<svg viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z\"/></svg>","sync":"<svg viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M160-160v-80h110l-16-14q-52-46-73-105t-21-119q0-111 66.5-197.5T400-790v84q-72 26-116 88.5T240-478q0 45 17 87.5t53 78.5l10 10v-98h80v240H160Zm400-10v-84q72-26 116-88.5T720-482q0-45-17-87.5T650-648l-10-10v98h-80v-240h240v80H690l16 14q49 49 71.5 106.5T800-482q0 111-66.5 197.5T560-170Z\"/></svg>","downloading":"<svg viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M439-82q-76-8-141.5-42.5t-113.5-88Q136-266 108.5-335T81-481q0-155 102.5-268.5T440-880v80q-121 17-200 107.5T161-481q0 121 79 211.5T439-162v80Zm40-198L278-482l57-57 104 104v-245h80v245l103-103 57 58-200 200Zm40 198v-80q43-6 82.5-23t73.5-43l58 58q-47 37-101 59.5T519-82Zm158-652q-35-26-74.5-43T520-800v-80q59 6 113 28.5T733-792l-56 58Zm112 506-56-57q26-34 42-73.5t22-82.5h82q-8 59-30 113.5T789-228Zm8-293q-6-43-22-82.5T733-677l56-57q38 45 61 99.5T879-521h-82Z\"/></svg>","check_circle":"<svg viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z\"/></svg>","error":"<svg viewBox=\"0 -960 960 960\" fill=\"currentColor\"><path d=\"M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z\"/></svg>"};
+  // Every row's own decrypted HTML now lives on the row itself (row.html
+  // for a plain file row, row.combinedHtml for the catalog group row) —
+  // no more external SHELL_HTML/DATA_HTML closures, since that hardcoded
+  // "exactly 2 critical modules" shape doesn't generalize past 2.
+  var ROWS=[],CRITICAL_FAILED=false;
+
+  function fmtBytes(n){
+    if(n>1024*1024)return (n/1024/1024).toFixed(1)+'MB';
+    if(n>1024)return Math.round(n/1024)+'KB';
+    return n+'B';
+  }
+
+  // 'unchanged' and 'done' share the same check icon — both mean "you
+  // have the current version cached," which is all a tile needs to
+  // convey; nothing else about how it got there matters at rest.
+  function statusIcon(state){
+    if(state==='error')return ICONS.error;
+    if(state==='downloading')return ICONS.downloading;
+    if(state==='unchanged'||state==='done')return ICONS.check_circle;
+    return ICONS.sync;
+  }
+
+  function cacheHas(url){
+    return caches.open(MODULES_CACHE_NAME).then(function(c){return c.match(url);}).then(function(m){return !!m;});
+  }
+
+  function setRowStatus(row,state){
+    row.state=state;
+    var cls=state==='error'?'err':((state==='unchanged'||state==='done')?'ok':(state==='checking'?'busy':''));
+    row.el.className='_cltile'+(cls?' '+cls:'');
+    row.statusEl.innerHTML=statusIcon(state);
+    row.statusEl.className='_cltile-status'+(cls?' '+cls:'');
+    if(DETAIL_ROW===row)refreshDetail();
+  }
+
+  // Writes the catalog group tile's live two-number display — green count
+  // of already-cached fragments on top, red "done/needed" fraction below
+  // (hidden entirely when nothing needs updating). row.cachedCount/
+  // row.staleCount are set ONCE right after the initial cache-check pass
+  // (see attemptCriticalGroup) and never touched again; doneOfStale is
+  // recomputed from live fragment state on every call instead of being
+  // incrementally tracked, so a retry (retryFailedFragments) can't
+  // double-count a fragment that already succeeded once.
+  function updateGroupTile(row){
+    if(row.greenEl)row.greenEl.textContent=String(row.cachedCount||0);
+    if(row.redEl){
+      if(row.staleCount>0){
+        row.redEl.style.display='';
+        var doneOfStale=row.fragments.filter(function(f){return !f.cached&&(f.state==='done'||f.state==='error');}).length;
+        row.redEl.textContent=doneOfStale+'/'+row.staleCount;
+      }else{
+        row.redEl.style.display='none';
+        row.redEl.textContent='';
+      }
+    }
+    // The group tile's own bottom progress sliver — same element every
+    // other tile already has, driven here by aggregate bytes across every
+    // fragment (cached fragments count as fully-loaded from the moment
+    // phase 1's cache-check sets f.loaded=f.size, see attemptCriticalGroup)
+    // instead of one file's own bytes.
+    if(row.barFillEl){
+      var total=0,loaded=0;
+      row.fragments.forEach(function(f){
+        if(f.state==='error')return;
+        total+=f.size;
+        loaded+=(f.loaded||0);
+      });
+      row.barFillEl.style.width=(total>0?Math.round(loaded/total*100):100)+'%';
+    }
+    if(DETAIL_ROW===row)refreshDetail();
+  }
+
+  // Doesn't touch the tile itself — every tile is already tappable (see
+  // renderRows) and opens the detail dialog, which is where the actual
+  // "Retry" action now lives for a failed item. This just arms the
+  // callback the dialog's own Retry button will invoke.
+  function armRetry(row,onRetry){
+    row.retry=onRetry;
+  }
+
+  function humanState(row){
+    if(row.state==='unchanged')return 'Up to date';
+    if(row.state==='done')return 'Downloaded';
+    if(row.state==='downloading'){
+      var pct=row.size>0?Math.round((row.loaded||0)/row.size*100):0;
+      return 'Downloading… '+pct+'%';
+    }
+    if(row.state==='error')return 'Failed';
+    return 'Checking…';
+  }
+
+  // Currently-open detail dialog's row, if any — kept so setRowStatus()
+  // and the download-progress tick can live-update the dialog instead of
+  // it going stale while a user leaves it open mid-download.
+  var DETAIL_ROW=null;
+  function refreshDetail(){
+    var row=DETAIL_ROW;
+    if(!row)return;
+    var cls=row.state==='error'?'err':((row.state==='unchanged'||row.state==='done')?'ok':'');
+    document.getElementById('_ctdlgstatus').innerHTML='<span class="_ctdlg-status-ic'+(cls?' '+cls:'')+'">'+statusIcon(row.state)+'</span>'+humanState(row);
+    var retryBtn=document.getElementById('_ctdlgretry');
+    if(row.state==='error'&&row.retry){
+      retryBtn.style.display='block';
+      retryBtn.onclick=function(){hideDetail();row.retry();};
+    }else{
+      retryBtn.style.display='none';
+      retryBtn.onclick=null;
+    }
+  }
+  function showDetail(row){
+    DETAIL_ROW=row;
+    document.getElementById('_ctdlgicon').innerHTML=ICONS[row.icon];
+    document.getElementById('_ctdlgtitle').textContent=row.critical?row.label:('Thumbnails '+row.label);
+    if(row.type==='group'){
+      var totalBytes=row.fragments.reduce(function(s,f){return s+f.size;},0);
+      var doneOfStale=row.fragments.filter(function(f){return !f.cached&&(f.state==='done'||f.state==='error');}).length;
+      document.getElementById('_ctdlgsize').textContent=fmtBytes(totalBytes);
+      document.getElementById('_ctdlgfilelabel').textContent='Fragments';
+      document.getElementById('_ctdlgfile').textContent=(row.cachedCount||0)+' cached, '+doneOfStale+'/'+(row.staleCount||0)+' downloading, '+row.fragments.length+' total';
+    }else{
+      document.getElementById('_ctdlgsize').textContent=fmtBytes(row.size);
+      document.getElementById('_ctdlgfilelabel').textContent='File';
+      document.getElementById('_ctdlgfile').textContent=row.file;
+    }
+    refreshDetail();
+    document.getElementById('_ctdlg').className='open';
+  }
+  function hideDetail(){
+    DETAIL_ROW=null;
+    document.getElementById('_ctdlg').className='';
+  }
+  document.getElementById('_ctdlgclose').addEventListener('click',hideDetail);
+  document.getElementById('_ctdlg').addEventListener('click',function(e){
+    if(e.target.id==='_ctdlg')hideDetail();
+  });
+
+  function updateAggregateBar(){
+    var loaded=0,total=0;
+    ROWS.forEach(function(row){
+      if(row.type==='group'){
+        row.fragments.forEach(function(f){
+          // Same error-exclusion rule as below, applied per-fragment.
+          if(f.state==='error')return;
+          total+=f.size;
+          loaded+=(f.loaded||0);
+        });
+        return;
+      }
+      // A terminally-failed row's bytes are excluded from the denominator
+      // so the aggregate bar can still reach 100% instead of stalling
+      // below it forever once a sprite sheet gives up retrying.
+      if(row.state==='error')return;
+      total+=row.size;
+      loaded+=(row.loaded||0);
+    });
+    var pct=total>0?Math.min(100,Math.round(loaded/total*100)):100;
+    document.getElementById('_clbarfill').style.width=pct+'%';
+  }
+
+  // Concurrency-limited pool: runs worker(item) for every item, at most
+  // `limit` in flight at once. worker() must never reject — each item
+  // handles its own success/failure internally (see attemptSprite()) so
+  // one item's failure can't abort the others still in flight.
+  function runPool(items,limit,worker){
+    return new Promise(function(resolve){
+      var idx=0,active=0,total=items.length;
+      if(total===0){resolve();return;}
+      function next(){
+        if(idx>=total){if(active===0)resolve();return;}
+        var item=items[idx++];active++;
+        worker(item).then(function(){active--;next();});
+      }
+      for(var i=0;i<Math.min(limit,total);i++)next();
+    });
+  }
+
+  // Streams one module's bytes with progress reporting, retrying the
+  // whole stream a few times on failure — same empirically-necessary
+  // retry convention as decModuleWithRetry above and sprite-worker.js's
+  // getSheetImage(), since a transient network hiccup mid-stream
+  // shouldn't be treated as permanent.
+  function downloadWithRetry(url,expectedSize,onProgress,attemptsLeft){
+    if(attemptsLeft===undefined)attemptsLeft=3;
+    return fetch(url).then(function(resp){
+      if(!resp.ok)throw new Error('HTTP '+resp.status);
+      var total=parseInt(resp.headers.get('content-length')||'0',10)||expectedSize;
+      var reader=resp.body.getReader();
+      var chunks=[],loaded=0;
+      function pump(){
+        return reader.read().then(function(res){
+          if(res.done){
+            var buf=new Uint8Array(loaded),off=0;
+            chunks.forEach(function(c){buf.set(c,off);off+=c.length;});
+            return buf.buffer;
+          }
+          chunks.push(res.value);
+          loaded+=res.value.length;
+          onProgress(loaded,total);
+          return pump();
+        });
+      }
+      return pump();
+    }).catch(function(err){
+      if(attemptsLeft>1)return downloadWithRetry(url,expectedSize,onProgress,attemptsLeft-1);
+      throw err;
+    });
+  }
+
+  function downloadRow(row){
+    row.loaded=0;
+    setRowStatus(row,'downloading');
+    return downloadWithRetry(row.file,row.size,function(loaded,total){
+      // Progress ticks update the bottom bar directly, without going
+      // through setRowStatus each time — the icon/tile classes are only
+      // ever set once per real state transition, not on every chunk.
+      row.loaded=loaded;
+      var pct=total>0?Math.round(loaded/total*100):0;
+      row.barFillEl.style.width=pct+'%';
+      updateAggregateBar();
+      if(DETAIL_ROW===row)refreshDetail();
+    }).then(function(buf){
+      // Written into MODULES_CACHE_NAME explicitly from here, rather than
+      // relying solely on the SW's own incidental caching of whatever it
+      // fetches — the bytes are already buffered anyway (needed for the
+      // progress bar and, for shell/data, for decryption), and a page
+      // isn't guaranteed to be SW-controlled until activate()'s
+      // clients.claim() completes, so relying purely on interception
+      // could occasionally leave a "downloaded" row silently un-cached,
+      // reappearing as stale on the very next visit.
+      return caches.open(MODULES_CACHE_NAME).then(function(c){return c.put(row.file,new Response(buf));}).then(function(){
+        row.loaded=row.size;
+        row.barFillEl.style.width='100%';
+        setRowStatus(row,'done');
+        updateAggregateBar();
+        return buf;
+      });
+    });
+  }
+
+  // needsBuffer: shell/misc/store-history need their decrypted bytes back;
+  // sprite rows only need to end up cached, so an already-cached sprite
+  // skips reading its (several-MB) bytes back out of Cache Storage for
+  // nothing.
+  function resolveRow(row,needsBuffer){
+    return cacheHas(row.file).then(function(has){
+      if(has){
+        setRowStatus(row,'unchanged');
+        row.loaded=row.size;
+        row.barFillEl.style.width='100%';
+        updateAggregateBar();
+        if(!needsBuffer)return null;
+        return caches.open(MODULES_CACHE_NAME).then(function(c){return c.match(row.file);}).then(function(r){return r.arrayBuffer();});
+      }
+      return downloadRow(row);
+    });
+  }
+
+  // Catalog-fragment equivalents of downloadRow/resolveRow, but for one
+  // fragment inside a group row's own `fragments` array — there's no
+  // per-fragment DOM (only the group's own single tile has DOM elements),
+  // so progress/status updates go through updateGroupTile() and the
+  // group's own barFillEl instead of a fragment-specific one.
+  function downloadFragment(groupRow,f){
+    f.loaded=0;
+    f.state='downloading';
+    return downloadWithRetry(f.file,f.size,function(loaded){
+      f.loaded=loaded;
+      updateGroupTile(groupRow);
+      updateAggregateBar();
+    }).then(function(buf){
+      return caches.open(MODULES_CACHE_NAME).then(function(c){return c.put(f.file,new Response(buf));}).then(function(){
+        f.loaded=f.size;
+        updateGroupTile(groupRow);
+        updateAggregateBar();
+        return buf;
+      });
+    });
+  }
+
+  // Never rejects — matches runPool()'s "worker() must never reject"
+  // contract (same as attemptSprite() today), so one fragment's failure
+  // can't abort the others still in flight. Uses the two-arg .then() form
+  // to separate decrypt failure (bytes fetched/read fine — wrong
+  // passphrase, hard-fails the WHOLE flow, same as attemptCritical's own
+  // decrypt-failure branch) from download/cache-read failure
+  // (network — per-FRAGMENT retry is the right recovery, scoped to just
+  // this one fragment instead of the whole module).
+  function resolveFragment(groupRow,f){
+    return cacheHas(f.file).then(function(has){
+      var bufPromise=has
+        ? caches.open(MODULES_CACHE_NAME).then(function(c){return c.match(f.file);}).then(function(r){return r.arrayBuffer();})
+        : downloadFragment(groupRow,f);
+      return bufPromise.then(function(buf){
+        return decModuleWithRetry(buf,window.__spriteKey).then(function(html){
+          f.html=html;
+          f.state=has?'unchanged':'done';
+          updateGroupTile(groupRow);
+        }).catch(function(){
+          hardFailWrongPassphrase();
+        });
+      },function(){
+        f.state='error';
+        updateGroupTile(groupRow);
+        updateAggregateBar();
+      });
+    });
+  }
+
+  function buildRows(manifest){
+    // rows[0] MUST stay the shell row — showEnterButton()'s click handler
+    // relies on that positional invariant to launch shell last.
+    var rows=[
+      {key:'shell',label:'App',file:manifest.shell.file,size:manifest.shell.size,critical:true,icon:'apps',type:'file'},
+      {key:'misc',label:'Misc',file:manifest.misc.file,size:manifest.misc.size,critical:true,icon:'database',type:'file'},
+      {key:'storeHistory',label:'History',file:manifest.storeHistory.file,size:manifest.storeHistory.size,critical:true,icon:'sync',type:'file'},
+      // The 48 catalog fragments render as ONE tile (not 48) — a live
+      // green/red aggregate count instead of a per-file row. cachedCount/
+      // staleCount get set once by attemptCriticalGroup() right after its
+      // initial cache-check pass; combinedHtml is the concatenation of
+      // every fragment's decrypted HTML, in bucket-index order (NOT
+      // completion order — see buildCatalogFragments()'s own invariant
+      // note), set once all 48 have resolved.
+      {
+        key:'catalog',label:'Catalog',icon:'database',critical:true,type:'group',
+        fragments:manifest.catalogFragments.map(function(f,i){return {index:i,file:f.file,size:f.size,state:'pending',cached:false,html:null,loaded:0};}),
+        cachedCount:0,staleCount:0,combinedHtml:null,
+      },
+    ];
+    // Uniformly treated as "needs update" for any cache miss — there's no
+    // client-side record of a prior manifest to diff against, so a brand
+    // new sheet (catalog grew) and a changed sheet (existing product's
+    // thumbnails repacked) both just look like "not cached yet," and the
+    // checklist doesn't need to know which one it is, only that it must
+    // fetch. Labeled by index only (not the full "Thumbnails (n/total)"
+    // text from the old list layout) — the tile's own image icon already
+    // says what kind of thing it is, so the tiny tile only needs to say
+    // which one.
+    manifest.sprites.forEach(function(s,i){
+      rows.push({key:'sprite'+i,label:String(i+1),file:s.file,size:s.size,critical:false,icon:'image',type:'file'});
+    });
+    return rows;
+  }
+
+  function renderRows(rows){
+    var container=document.getElementById('_clrows');
+    container.innerHTML='';
+    rows.forEach(function(row){
+      var el=document.createElement('div');
+      el.className='_cltile';
+      if(row.type==='group'){
+        var totalBytes=row.fragments.reduce(function(s,f){return s+f.size;},0);
+        el.title=row.label+' ('+row.fragments.length+' fragments, '+fmtBytes(totalBytes)+')';
+        el.innerHTML='<span class="_cltile-icon">'+ICONS[row.icon]+'</span>'
+          +'<span class="_cltile-group-counts"><span class="_cltile-group-green">–</span><span class="_cltile-group-red" style="display:none"></span></span>'
+          +'<span class="_cltile-status"></span>'
+          +'<span class="_cltile-bar"><span class="_cltile-bar-fill"></span></span>';
+        row.greenEl=el.querySelector('._cltile-group-green');
+        row.redEl=el.querySelector('._cltile-group-red');
+      }else{
+        el.title=row.label+' ('+fmtBytes(row.size)+')';
+        el.innerHTML='<span class="_cltile-icon">'+ICONS[row.icon]+'</span>'
+          +'<span class="_cltile-label">'+row.label+'</span>'
+          +'<span class="_cltile-status"></span>'
+          +'<span class="_cltile-bar"><span class="_cltile-bar-fill"></span></span>';
+      }
+      el.onclick=function(){showDetail(row);};
+      container.appendChild(el);
+      row.el=el;
+      row.barFillEl=el.querySelector('._cltile-bar-fill');
+      row.statusEl=el.querySelector('._cltile-status');
+    });
+  }
+
+  function showChecklistUI(){
+    document.getElementById('_gf').style.display='none';
+    // Explicit 'block', not '' — '' merely clears any inline override and
+    // falls back to the stylesheet's own display:none for #_cl (needed so
+    // it starts hidden before JS runs at all), so it wouldn't actually
+    // become visible without a real non-empty value here.
+    document.getElementById('_cl').style.display='block';
+  }
+
+  function showEnterButton(){
+    gm.textContent='Ready.';gm.className='w';
+    var btn=document.getElementById('_clenter');
+    btn.style.display='block';
+    btn.onclick=function(){
+      // Every OTHER critical module launches first (sets CATALOG/
+      // PRODUCTS_HISTORICAL/BOX_CONTENTS/GAME_SYSTEMS_I18N/STORE_HISTORY as
+      // globals via their <script> tags) — order AMONG those doesn't
+      // matter, report.html never references any of those globals until
+      // after every data <script> tag has run — THEN the shell module
+      // launches last (replaces document.body with the real app markup
+      // and runs the lib + main inline scripts that read those globals),
+      // reproducing report.html's own script order exactly. Manual click
+      // only — never auto-proceeds, even when this exact button appears
+      // immediately with nothing to show for it because everything was
+      // already unchanged.
+      ROWS.slice(1).filter(function(r){return r.critical;}).forEach(function(r){
+        launch(r.type==='group'?r.combinedHtml:r.html);
+      });
+      launch(ROWS[0].html); // shell — ROWS[0] invariant from buildRows()
+    };
+  }
+
+  function checkReady(){
+    if(CRITICAL_FAILED)return;
+    var criticalReady=ROWS.filter(function(r){return r.critical;}).every(function(r){
+      return r.type==='group'?(r.combinedHtml!=null):(r.html!=null);
+    });
+    if(!criticalReady)return;
+    var spritesSettled=ROWS.filter(function(r){return !r.critical;}).every(function(r){
+      return r.state==='unchanged'||r.state==='done'||r.state==='error';
+    });
+    if(!spritesSettled)return;
+    showEnterButton();
+  }
+
+  // Decrypt failure after a successful download/cache-read is almost
+  // certainly a wrong passphrase (the bytes fetched fine) — the bytes stay
+  // validly cached for a future correct attempt (only decryption is
+  // passphrase-sensitive, caching isn't), but this attempt is done: revert
+  // to the passphrase form rather than offering a per-row retry, which
+  // would just redownload/reread identical bytes and fail identically.
+  // Shared by attemptCritical (single-file critical rows) and
+  // resolveFragment (catalog-group fragments) — same failure, same
+  // recovery, regardless of which kind of row hit it.
+  function hardFailWrongPassphrase(){
+    CRITICAL_FAILED=true;
+    document.getElementById('_cl').style.display='none';
+    document.getElementById('_clenter').style.display='none';
+    document.getElementById('_gf').style.display='';
+    localStorage.removeItem(SK);
+    gm.textContent='Wrong passphrase — try again.';gm.className='e';
+  }
+
+  function attemptCritical(row){
+    resolveRow(row,true).then(function(buf){
+      return decModuleWithRetry(buf,window.__spriteKey).then(function(html){
+        row.html=html;
+        checkReady();
+      }).catch(hardFailWrongPassphrase);
+    }).catch(function(){
+      // Download failure (network) — row-level retry is the right recovery.
+      setRowStatus(row,'error');
+      updateAggregateBar();
+      armRetry(row,function(){attemptCritical(row);});
+    });
+  }
+
+  // Catalog-group equivalent of attemptCritical: two phases so
+  // cachedCount/staleCount are a stable snapshot (set once) rather than
+  // incrementally revealed as concurrency-limited checks trickle in — see
+  // updateGroupTile()'s own comment for why that matters.
+  function attemptCriticalGroup(row){
+    Promise.all(row.fragments.map(function(f){
+      return cacheHas(f.file).then(function(has){f.cached=has;if(has)f.loaded=f.size;});
+    })).then(function(){
+      row.cachedCount=row.fragments.filter(function(f){return f.cached;}).length;
+      row.staleCount=row.fragments.length-row.cachedCount;
+      updateGroupTile(row);
+      updateAggregateBar();
+      return runPool(row.fragments,DOWNLOAD_CONCURRENCY,function(f){return resolveFragment(row,f);});
+    }).then(function(){
+      if(row.fragments.some(function(f){return f.state==='error';})){
+        // A download failure on one fragment never hard-fails the whole
+        // passphrase flow (unlike a decrypt failure, handled inside
+        // resolveFragment itself) — combinedHtml stays null so
+        // checkReady() keeps waiting, and the group tile offers a retry
+        // that only re-attempts the failed fragment(s).
+        setRowStatus(row,'error');
+        updateAggregateBar();
+        armRetry(row,function(){retryFailedFragments(row);});
+        return;
+      }
+      // Concatenate in FIXED bucket-index order — row.fragments is never
+      // reordered, only mutated in place, so this is correct regardless of
+      // which fragment's async work actually finished first.
+      row.combinedHtml=row.fragments.map(function(f){return f.html;}).join('\n');
+      setRowStatus(row,row.staleCount>0?'done':'unchanged');
+      checkReady();
+    });
+  }
+
+  function retryFailedFragments(row){
+    var failed=row.fragments.filter(function(f){return f.state==='error';});
+    runPool(failed,DOWNLOAD_CONCURRENCY,function(f){f.state='pending';return resolveFragment(row,f);}).then(function(){
+      if(row.fragments.some(function(f){return f.state==='error';})){
+        setRowStatus(row,'error');
+        armRetry(row,function(){retryFailedFragments(row);});
+      }else{
+        row.combinedHtml=row.fragments.map(function(f){return f.html;}).join('\n');
+        setRowStatus(row,'done');
+        checkReady();
+      }
+    });
+  }
+
+  function attemptSprite(row){
+    return resolveRow(row,false).then(function(){
+      checkReady();
+    }).catch(function(){
+      // Sprite failures never block "Enter catalog" — the app's existing
+      // hotlink-fallback path already degrades gracefully for any
+      // thumbnail without local sprite data, so a failed prefetch here is
+      // just "missing," not a new failure mode for the rest of the app.
+      setRowStatus(row,'error');
+      updateAggregateBar();
+      checkReady();
+      armRetry(row,function(){attemptSprite(row);});
+    });
+  }
+
+  function beginChecklist(manifest){
+    ROWS=buildRows(manifest);
+    CRITICAL_FAILED=false;
+    showChecklistUI();
+    renderRows(ROWS);
+    ROWS.forEach(function(row){setRowStatus(row,'checking');});
+    gm.textContent='Unlocked — checking for updates…';gm.className='w';
+
+    ROWS.forEach(function(row){
+      if(!row.critical)return;
+      if(row.type==='group')attemptCriticalGroup(row);else attemptCritical(row);
+    });
+    runPool(ROWS.filter(function(r){return !r.critical;}),DOWNLOAD_CONCURRENCY,attemptSprite);
+  }
+
+  function startChecklist(p){
+    var salt=b2b(SALT_B64);
+    return dk(p,salt).then(function(k){
+      window.__spriteKey=k;
+      // build-manifest.json is intentionally fetched with cache:'no-store'
+      // (never served stale from Cache Storage) — it's the one file that
+      // must always reflect the CURRENT deploy so the client knows which
+      // shell/misc/store-history/catalog-fragment/sprite filenames to ask
+      // for. It's tiny, so this costs nothing.
+      return fetch('build-manifest.json',{cache:'no-store'}).then(function(r){
+        if(!r.ok)throw new Error('manifest http '+r.status);
+        return r.json();
+      });
+    }).then(function(manifest){
+      localStorage.setItem(SK,p);
+      beginChecklist(manifest);
+    });
+  }
+
+  var sv=localStorage.getItem(SK);
+  if(sv){
+    gm.textContent='Unlocking…';gm.className='w';
+    startChecklist(sv).catch(function(){
+      // Failure here is a manifest/network problem, not a wrong
+      // passphrase (that only surfaces later, at decrypt time, inside
+      // attemptCritical) — leave the stored passphrase alone since it's
+      // likely still correct, and just fall back to the passphrase form
+      // so the user can retry manually.
+      gm.textContent='';gm.className='';
+    });
+  }
+
+  document.getElementById('_gf').addEventListener('submit',function(e){
+    e.preventDefault();
+    var p=document.getElementById('_pw').value;
+    if(!p)return;
+    gm.textContent='Unlocking… (first time takes a moment)';gm.className='w';
+    startChecklist(p).catch(function(){
+      gm.textContent='Couldn\'t reach the server — check your connection and try again.';gm.className='e';
+    });
+  });
+}());
+</script>
+<script>
+(function(){
+  var ref=document.getElementById('_ref');
+  ref.addEventListener('click',function(){
+    var btn=this;btn.textContent='Clearing…';btn.disabled=true;
+    Promise.all([
+      navigator.serviceWorker?navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister();}));}):Promise.resolve(),
+      window.caches?caches.keys().then(function(ks){return Promise.all(ks.map(function(k){return caches.delete(k);}));}):Promise.resolve()
+    ]).then(function(){location.reload(true);});
+  });
+}());
+</script>
+</body>
+</html>
